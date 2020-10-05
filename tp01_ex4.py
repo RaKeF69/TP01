@@ -36,7 +36,5 @@ elif mois_uti == 2:
         print(MESSAGE2)
     if jour_uti == 29 and ((annee_uti % 4 == 0 and annee_uti % 100 != 0) or annee_uti % 400 == 0):
         print(MESSAGE1)
-    else:
-        print(MESSAGE2)
 else:
     print(MESSAGE1)
