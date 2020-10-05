@@ -17,6 +17,39 @@ d'autres informations.
 
 """
 ### Déclaration et initialisation des variables
-
+PRIX_BILLET: int = 10
+RABAIS_ETU: int = 2
+RABAIS_DEMI: int = 5
+RABAIS_GROUPE: int = 2
+TAILLE_GROUPE_MIN: int = 4
+MESSAGE: str = "Le prix à payer est: {}CHF"
+total: int = 0
+carte_mensuelle: str = None
+carte_demi: str = None
+carte_etu: str = None
+nbr_ticket: int = None
 
 ### Séquence d'opération
+### Si l'utilisateur à la carte mensuelle, on arrète le programme. Sinon on pose les questions supplémentaires
+carte_mensuelle = input("Possédez-vous la carte mensuelle ? (oui non) ")
+if carte_mensuelle == "oui":
+    print(MESSAGE.format(total))
+else:
+    carte_demi = input("Possédez-vous la carte demi tarif ? (oui non) ")
+    carte_etu = input("Possédez-vous la carte étudiante ? (oui non) ")
+### Pour chaque cas de figure différent, on éffectue les calculs correspondant
+    if carte_etu == "oui" and carte_demi == "oui":
+        total = PRIX_BILLET - RABAIS_DEMI - RABAIS_ETU
+    elif carte_etu == "oui" and carte_demi == "non":
+        total = PRIX_BILLET - RABAIS_ETU
+    elif carte_etu == "non" and carte_demi == "oui":
+        total = PRIX_BILLET - RABAIS_DEMI
+    elif carte_etu == "non" and carte_demi == "non":
+        nbr_ticket = int(input("Combien de billets voulez-vous ? "))
+# On vérifie que le groupe soit de minimum 4 personnes
+        if nbr_ticket >= TAILLE_GROUPE_MIN:
+            total = nbr_ticket * (PRIX_BILLET - RABAIS_GROUPE)
+        else:
+            total = nbr_ticket * PRIX_BILLET
+### On affiche le total à payer
+    print(MESSAGE.format(total))
