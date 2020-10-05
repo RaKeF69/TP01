@@ -21,6 +21,14 @@ Programme calculant le niveau de risque cardiovasculaire.
 
 """
 ### Déclaration et initialisation des variables
+VIEUX: int = 50
+VIEILLE: int = 60
+COEFF_FUME: int = 2
+COEFF_SUCRE: int = 2
+COEFF_AGE: int = 1
+COEFF_SPORT: int = 1
+RISK_LOW: int = 1
+RISK_HIGH: int = 3
 risk: int = 0
 age_uti: int = None
 sexe_uti: str = None
@@ -28,23 +36,25 @@ fume: str = None
 sport: str = None
 sucre: str = None
 ### Séquence d'opération
-
+# On demande les informations à l'utilisateur
 fume = input("Etes-vous fumeur ? (oui ou non)")
 sport = input("Faits -vous du sport ? (oui ou non)")
 sexe_uti = input("Quel est votre sexe ? (h ou f)")
 age_uti = int(input("Quel est votre age ? "))
 sucre = input("Consommez-vous beaucoup d'aliments sucrés ? (oui ou non)")
+# Pour chaque cas, on ajoute ou enlève les valeurs correspondante aux cas
 if fume == "oui":
-    risk += 2
+    risk += COEFF_FUME
 if sport == "oui":
-    risk -= 1
-if (age_uti > 50 and sexe_uti == "h") or (age_uti > 60 and sexe_uti == "f"):
-    risk += 1
+    risk -= COEFF_SPORT
+if (age_uti > VIEUX and sexe_uti == "h") or (age_uti > VIEILLE and sexe_uti == "f"):
+    risk += COEFF_AGE
 if sucre == "oui":
-    risk += 2
-if risk <= 1:
+    risk += COEFF_SUCRE
+# On affiche le résultat final
+if risk <= RISK_LOW:
     print("Le niveau de risque est faible ({})".format(risk))
-elif risk <= 3:
+elif risk <= RISK_HIGH:
     print("Le niveau de risque est élevé ({})".format(risk))
 else:
     print("Le niveau de risque est très élevé ({})".format(risk))
