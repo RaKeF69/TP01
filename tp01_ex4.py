@@ -32,4 +32,11 @@ elif jour_uti == 31:
     if mois_uti in list(MOIS_31):
         print(MESSAGE1)
 elif mois_uti == 2:
-    if jour_uti > 28
+    if jour_uti > 29:
+        print(MESSAGE2)
+    if jour_uti == 29 and ((annee_uti % 4 == 0 and annee_uti % 100 != 0) or annee_uti % 400 == 0):
+        print(MESSAGE1)
+    else:
+        print(MESSAGE2)
+else:
+    print(MESSAGE1)
