@@ -23,18 +23,13 @@ mois_uti: int = None
 annee_uti: int = None
 
 ### Séquence d'opération
+# On demande à l'utilisateur de rentrer une date
 jour_uti = int(input("Saisissez un jour: "))
 mois_uti = int(input("Sasissez un mois: "))
 annee_uti = int(input("Saisissez une année: "))
-if mois_uti > 13 or jour_uti > 31:
+### Si les mois sont supérieur à 13 ou les jours supérieur à 31, on affiche le message d'erreur.
+### Par soucis d'efficacité, la vérification pour les années bisextiles est exécutée en même temps
+if mois_uti > 13 or jour_uti > 31 or (jour_uti == 31 and mois_uti not in list(MOIS_31)) or (mois_uti == 2 and (jour_uti > 29 or not(jour_uti == 29 and ((annee_uti % 4 == 0 and annee_uti % 100 != 0) or annee_uti % 400 == 0)))):
     print(MESSAGE2)
-elif jour_uti == 31:
-    if mois_uti in list(MOIS_31):
-        print(MESSAGE1)
-elif mois_uti == 2:
-    if jour_uti > 29:
-        print(MESSAGE2)
-    if jour_uti == 29 and ((annee_uti % 4 == 0 and annee_uti % 100 != 0) or annee_uti % 400 == 0):
-        print(MESSAGE1)
 else:
     print(MESSAGE1)
